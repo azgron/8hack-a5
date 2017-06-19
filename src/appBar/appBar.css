@@ -1,0 +1,18 @@
+.app-bar-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #373277;
+    border-bottom: 5px solid #3da2c3;
+}
+
+.app-title {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
