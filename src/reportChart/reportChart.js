@@ -4,13 +4,15 @@ import Chart from 'chart.js';
 // based on https://github.com/houjiazong/react-chartjs2/blob/master/src/index.js
 class ReportChart extends Component {
   componentDidMount() {
+    this.initChart(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.initChart(nextProps);
+  }
+  
+  initChart({ type, data, options }) {
     const ctx = this.refs['canvas'].getContext('2d');
-
-    this.chart = new Chart(ctx, {
-        type: this.props.type,
-        data: this.props.data,
-        options: this.props.options,
-    });
+    this.chart = new Chart(ctx, { type, data, options });
   }
 
   render() {

@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import ReportChart from '../reportChart/reportChart.js'
 
 function* groupCounts(arr) {
-  let prev = NaN; // to never be equal to something at first
+  let start = true;
+  let prev = undefined;
   let count = 0;
   for (let value of arr) {
-    if (value === prev) {
+    if (start || value === prev) {
       count++;
     } else {
-      yield { value, count };
-      count = 0;
-      prev = value;
+      yield { value: prev, count };
+      count = 1;
     }
+    start = false;
+    prev = value;
+  }
+  if (count >= 0) {
+    yield { value: prev, count };
   }
 }
 
@@ -25,12 +30,23 @@ function reportDatesToDataset(reportDates) {
 }
 
 class AnswersTimelineChart extends Component {
+  /// title = String
+  /// answers = String[]
+  /// reportDates = Number[][] (unix date)
+
   constructor() {
       super();
       this.state = { data: {}, options: {} };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.initDataset(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.initDataset(nextProps);
+  }
+
+  initDataset({ title, answers, reportDates }) {
     const seriesColors = [
       ReportChart.chartColors.blue,
       ReportChart.chartColors.red,
@@ -39,9 +55,9 @@ class AnswersTimelineChart extends Component {
 
     this.setState({
       data: {
-        datasets: this.props.answers.map((answer, i) => ({
+        datasets: answers.map((answer, i) => ({
             label: answer,
-            data: reportDatesToDataset(this.props.reportDates[i]),
+            data: reportDatesToDataset(reportDates[i]),
             fill: false,
             backgroundColor: seriesColors[i],
             borderColor: seriesColors[i],
@@ -50,18 +66,14 @@ class AnswersTimelineChart extends Component {
     });
 
     this.setState({
-        options: {
+      options: {
         responsive: true,
-        title: { display: true, text: this.props.title },
+        title: { display: true, text: title },
         tooltips: { mode: 'index', intersect: false, callbacks: {
-            /*beforeLabel(arr, data) {
-            var i = arr.index;
-            var data1 = data.datasets[arr.datasetIndex];
-            return data1.data[i] + ": ";
-            },
-            label(arr, data) {
-            return data.labels[arr.index];
-            }*/
+            title(arr, data) {
+              const date = arr[0].xLabel;
+              return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+            }
         } },
         hover: { mode: 'nearest', intersect: true },
         elements: { line: { tension: 0.2 } }, // bezier curve curviness
