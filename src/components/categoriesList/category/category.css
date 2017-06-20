@@ -1,0 +1,23 @@
+
+.category-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    min-width: 25%;
+    height: 35%;
+}
+
+.category-content {
+    background-color: gray;
+    height: 100%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;    
+}
+
+.category-content:focus {
+    background-color: orange !important;
+}
