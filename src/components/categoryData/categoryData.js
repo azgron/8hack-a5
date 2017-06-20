@@ -3,6 +3,8 @@ import AnswersTimelineChart from '../charts/answersTimelineChart.js'
 import SurveyBarChart from '../charts/surveyBarChart.js'
 import firebase from 'firebase';
 
+import avatar from '../../assets/userAvatar.png';
+
 import './categoryData.css';
 
 // Initialize Firebase
@@ -26,7 +28,7 @@ class CategoryData extends Component {
 
   componentDidMount() {
     // get data from our DB
-    
+
     // 3 data streams for the answer timeline
     this.dbCategories.child('A').on('value', snapshot => {
       this.setState({ dataA: Object.values(snapshot.val()) });
@@ -54,21 +56,38 @@ class CategoryData extends Component {
             <div className="category-page-content">
                 <div className="title category-page-title">מציג מדדים עבור: {this.context.router.params.category}</div>
 
-                <div className="charts-container" style={{display: 'flex', height: 'auto', padding: '2%', boxSizing: 'border-box'}}>
-                    <div style={{backgroundColor: 'white', padding: '1%', width: '50%', boxSizing: 'border-box'}}>
-                        <AnswersTimelineChart
-                        title="הסעות לאוניברסיטה"
-                        answers={['חיכו מעל שעה','חיכו מעל חצי-שעה','זניח']}
-                        reportDates={[this.state.dataA, this.state.dataB, this.state.dataC]}
-                    />
-                    </div>
-                    <div style={{backgroundColor: 'white', padding: '1%', width: '50%', boxSizing: 'border-box'}}>
-                        <SurveyBarChart
-                        title="כמות הדיווחים האחרונים"
-                        answers={['עומס כבד מאוד','האוטבוס לא עצר','ההסעה לא מגיעה']}
-                        counters={this.state.dataD}/>
+                <div className="panel">
+                    <div className="panel-title">דשבורד</div>
+                    <div className="charts-container">
+                        <div className="single-chart-wrap">
+                            <AnswersTimelineChart
+                            title="הסעות לאוניברסיטה"
+                            answers={['חיכו מעל שעה','חיכו מעל חצי-שעה','זניח']}
+                            reportDates={[this.state.dataA, this.state.dataB, this.state.dataC]}
+                        />
+                        </div>
+                        <div className="single-chart-wrap">
+                            <SurveyBarChart
+                            title="כמות הדיווחים האחרונים"
+                            answers={['עומס כבד מאוד','האוטבוס לא עצר','ההסעה לא מגיעה']}
+                            counters={this.state.dataD}/>
+                        </div>
                     </div>
                 </div>
+
+                <div className="panel">                
+                    <div className="panel-title">תגובות</div>
+                    <div className="comments-container">
+                        <div className="user-comment">
+                            <img className="user-comment-avatar" src={avatar} />
+                            <div className="user-comment-data">
+                                <div className="user-comment-details"><span>13:07</span> <span>20/06/2017</span> <b>blueUser</b></div>
+                                <div>האוטובוס היה מלוכלך</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );

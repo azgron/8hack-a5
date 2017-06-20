@@ -4,5 +4,6 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   direction: rtl;
   background-image: url('./assets/backgroungImg.jpeg');
+  background-size: cover;
   background-repeat: no-repeat;
 }
