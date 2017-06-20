@@ -68,13 +68,14 @@ class AnswersTimelineChart extends Component {
     this.setState({
       options: {
         responsive: true,
-        title: { display: true, text: title },
+        title: { display: true, fontSize: 20, text: title },
         tooltips: { mode: 'index', intersect: false, callbacks: {
             title(arr, data) {
               const date = arr[0].xLabel;
               return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
             }
         } },
+        legends: { fontSize: 14 },
         hover: { mode: 'nearest', intersect: true },
         elements: { line: { tension: 0.2 } }, // bezier curve curviness
         scales: {

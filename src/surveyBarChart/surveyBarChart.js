@@ -42,8 +42,9 @@ class SurveyBarChart extends Component {
     this.setState({
       options: {
         responsive: true,
-        title: { display: true, text: title },
+        title: { display: true, fontSize: 20, text: title },
         tooltips: { mode: 'index', intersect: false },
+        legend: { display: false },
         hover: { mode: 'nearest', intersect: true },
         scales: {
             yAxes: [{ display: true, ticks: { beginAtZero: true, stepSize: 1 }, scaleLabel: { display: true, labelString: 'כמות הדיווחים' } }],
