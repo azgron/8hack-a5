@@ -10,7 +10,7 @@ class AppBar extends Component {
   render() {
     return (
         <div className="app-bar-wrap">
-            <div className="app-title">מה כואב להם</div>
+            <div className="app-title">הכל בסדר!</div>
       </div>
     );
   }

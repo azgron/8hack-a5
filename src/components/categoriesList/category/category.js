@@ -8,7 +8,7 @@ class Category extends Component {
   }
   
   goToCategory = (categoryName) => {
-      console.log(categoryName);
+      this.context.router.push('/' + categoryName);
   };
 
   render() {
@@ -20,6 +20,10 @@ class Category extends Component {
       </div>
     );
   }
+  
+  static contextTypes = {
+      router: React.PropTypes.func.isRequired
+    }
 }
 
-export default Category;
+export default Category
