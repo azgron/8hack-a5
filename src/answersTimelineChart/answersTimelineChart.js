@@ -79,7 +79,7 @@ class AnswersTimelineChart extends Component {
         elements: { line: { tension: 0.2 } }, // bezier curve curviness
         scales: {
             xAxes: [{ type: 'time', time: { unit: 'hour', displayFormats: { hour: 'HH:mm' } }, display: true, scaleLabel: { display: true, labelString: 'שעה' } }],
-            yAxes: [{ display: true, scaleLabel: { display: true, labelString: 'כמות הדיווחים' } }],
+            yAxes: [{ display: true, ticks: { beginAtZero: true, stepSize: 1 }, scaleLabel: { display: true, labelString: 'כמות הדיווחים' } }],
         },
       }
     });

@@ -44,13 +44,13 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <div style={{width: '50%', float: 'left'}}>
+        <div style={{padding: '1%', width: '50%', boxSizing: 'border-box', float: 'left'}}>
           <AnswersTimelineChart
             title="הסעות לאוניברסיטה"
             answers={['חיכו מעל שעה','חיכו מעל חצי-שעה','זניח']}
             reportDates={[this.state.dataA, this.state.dataB, this.state.dataC]}></AnswersTimelineChart>
         </div>
-        <div style={{width: '50%', float: 'left'}}>
+        <div style={{padding: '1%', width: '50%', boxSizing: 'border-box', float: 'left'}}>
           <SurveyBarChart
             title="מידת הרצון ממערך ההסעות"
             answers={['לא מרוצה','מרוצה','מאוד מרוצה']}
