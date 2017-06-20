@@ -70,16 +70,12 @@ class AnswersTimelineChart extends Component {
         responsive: true,
         title: { display: true, fontSize: 20, text: title },
         tooltips: { mode: 'index', intersect: false, callbacks: {
-            title(arr, data) {
-              const date = arr[0].xLabel;
-              return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
-            }
         } },
         legends: { fontSize: 14 },
         hover: { mode: 'nearest', intersect: true },
         elements: { line: { tension: 0.2 } }, // bezier curve curviness
         scales: {
-            xAxes: [{ type: 'time', time: { unit: 'hour', displayFormats: { hour: 'HH:mm' } }, display: true, scaleLabel: { display: true, labelString: 'שעה' } }],
+            xAxes: [{ type: 'time', time: { unit: 'hour', unitStepSize: 1, /* min: new Date(Date.now() - 24*60*60*1000), max: new Date(), */ tooltipFormat: 'HH:mm', displayFormats: { hour: 'HH:mm' } }, display: true, scaleLabel: { display: true, labelString: 'שעה' } }],
             yAxes: [{ display: true, ticks: { beginAtZero: true, stepSize: 1 }, scaleLabel: { display: true, labelString: 'כמות הדיווחים' } }],
         },
       }
