@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import AnswersTimelineChart from './answersTimelineChart/answersTimelineChart.js'
+import SurveyBarChart from './surveyBarChart/surveyBarChart.js'
 import firebase from 'firebase';
 import './App.css';
 
@@ -14,34 +15,26 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const title = 'הסעות לאוניברסיטה';
-const answers = ['חיכו מעל שעה', 'חיכו מעל חצי-שעה', 'זניח'];
-
 class App extends Component {
   constructor() {
     super();
     this.state = { dataA: [], dataB: [], dataC: [] };
-    this.tomChild = this.getRef().child('categories');
-  }
-
-  getRef() {
-    return firebase.database().ref();
+    this.dbCategories = firebase.database().ref().child('categories');
   }
 
   componentDidMount() {
-    this.tomChild.child('A').on('value', snapshot => {
+    this.dbCategories.child('A').on('value', snapshot => {
       this.setState({ dataA: Object.values(snapshot.val()) });
     });
-    this.tomChild.child('B').on('value', snapshot => {
+    this.dbCategories.child('B').on('value', snapshot => {
       this.setState({ dataB: Object.values(snapshot.val()) });
     });
-    this.tomChild.child('C').on('value', snapshot => {
+    this.dbCategories.child('C').on('value', snapshot => {
       this.setState({ dataC: Object.values(snapshot.val()) });
     });
   }
 
   render() {
-    const randomReportDates = [this.state.dataA, this.state.dataB, this.state.dataC];
     return (
       <div className="App">
         <div className="App-header">
@@ -51,8 +44,17 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <div style={{width: '50%'}}>
-          <AnswersTimelineChart title={title} answers={answers} reportDates={randomReportDates}></AnswersTimelineChart>
+        <div style={{width: '50%', float: 'left'}}>
+          <AnswersTimelineChart
+            title="הסעות לאוניברסיטה"
+            answers={['חיכו מעל שעה','חיכו מעל חצי-שעה','זניח']}
+            reportDates={[this.state.dataA, this.state.dataB, this.state.dataC]}></AnswersTimelineChart>
+        </div>
+        <div style={{width: '50%', float: 'left'}}>
+          <SurveyBarChart
+            title="מידת הרצון ממערך ההסעות"
+            answers={['לא מרוצה','מרוצה','מאוד מרוצה']}
+            counters={[6,8,3]}></SurveyBarChart>
         </div>
       </div>
     );

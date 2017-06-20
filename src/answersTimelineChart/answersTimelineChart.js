@@ -23,7 +23,7 @@ function* groupCounts(arr) {
 function reportDatesToDataset(reportDates) {
   return Array.from(groupCounts(
     // round all reports by half hour intervals
-    reportDates.map(date => Math.floor(date / (30*60*1000)) * (30*60*1000))
+    reportDates.map(date => Math.floor(date / (60*60*1000)) * (60*60*1000))
   ))
   // create a dataset of rounded dates to count
   .map(({ value, count }) => ({ x: new Date(value), y: count }));
