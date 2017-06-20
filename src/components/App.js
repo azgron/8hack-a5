@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AppBar from './appBar/appBarComponent';
+import Categories from './categoriesList/categoriesList';
+
 
 import './App.css';
 
@@ -8,6 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <AppBar/>
+        <Categories/>
       </div>
     );
   }
