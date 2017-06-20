@@ -60,7 +60,7 @@ class AnswersTimelineChart extends Component {
             data: reportDatesToDataset(reportDates[i]),
             fill: false,
             backgroundColor: seriesColors[i],
-            borderColor: seriesColors[i],
+            borderColor: seriesColors[i].replace('rgb', 'rgba').replace(')', ', 0.5)'),
         }))
       }
     });
