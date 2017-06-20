@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
 import Category from './category/category';
-import * as firebase from 'firebase';
 
 
 import './categoriesList.css';
-
-// Initialize Firebase
-const config = {
-  apiKey: "AIzaSyA6TjtSW85v3_YMX7VFUwcw064aj-meVDU",
-  authDomain: "boiling-torch-1957.firebaseapp.com",
-  databaseURL: "https://boiling-torch-1957.firebaseio.com",
-  storageBucket: "gs://boiling-torch-1957.appspot.com",
-  messagingSenderId: "865900344487"
-};
-firebase.initializeApp(config);
 
 class CategoriesList extends Component {
   constructor(props, context){
@@ -31,28 +20,7 @@ class CategoriesList extends Component {
               'אחר'
           ]
       };
-
-    //   this.tomChild = this.getRef().child("tom");
   }
-
-  componentDidMount(){
-    //   this.getCategories()
-    //   .then(categories => {
-    //       this.setState({ categories });
-    //   });
-    
-//     this.tomChild.on('value', snapshot => {
-//             this.setState({data: snapshot.val()});
-//         });
-  }
-  
-//   getCategories = () => {
-//       return Promise.resolve({});
-//   };
-
-//   getRef() {
-//         return firebase.database().ref();
-//     }
 
   render() {
     return (
