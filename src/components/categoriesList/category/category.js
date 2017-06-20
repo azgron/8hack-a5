@@ -7,11 +7,15 @@ class Category extends Component {
       super(props, context);
   }
   
+  goToCategory = (categoryName) => {
+      console.log(categoryName);
+  };
+
   render() {
     return (
         <div className="category-wrap">
-            <div className="category-content">
-                <span>{this.props.name}</span>
+            <div className="category-content" onClick={() => this.goToCategory(this.props.name)}>
+                <span className="text">{this.props.name}</span>
             </div>
       </div>
     );

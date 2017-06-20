@@ -57,6 +57,7 @@ class CategoriesList extends Component {
   render() {
     return (
         <div className="categories-list-wrap">
+          <div className="title">במה תרצה להתמקד?</div>
             <div className="list-content">            
                 {this.state.categories.map(category => <Category key={category} name={category}/>)}
             </div>
